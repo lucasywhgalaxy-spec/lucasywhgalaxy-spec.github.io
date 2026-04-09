@@ -101,3 +101,17 @@ if (avatarWrap && window.matchMedia("(min-width: 761px)").matches) {
 
 updateTime();
 setInterval(updateTime, 1000);
+
+fetch('posts.json')
+  .then(res => res.json())
+  .then(posts => {
+    const list = document.getElementById('post-list');
+    list.innerHTML = posts
+      .map(p => `
+        <li>
+          <a href="post.html?file=${p.file}">${p.title}</a>
+          <span style="opacity:0.6; margin-left:8px;">${p.date}</span>
+        </li>
+      `)
+      .join('');
+  });
