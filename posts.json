@@ -1,20 +1,20 @@
 [
   {
+    "title": "测试文章",
+    "file": "first.md",
+    "date": "2026-04-09",
+    "tags": []
+  },
+  {
     "title": "英语语言学入门笔记",
     "file": "linguistics-notes.md",
     "date": "2026-04-09",
-    "tags": ["谷歌", "苹果"]
+    "tags": []
   },
   {
     "title": "我的游泳训练记录",
     "file": "swimming-log.md",
-    "date": "2026-04-05",
-    "tags": ["三星"]
-  },
-  {
-    "title": "第一篇测试文章",
-    "file": "first.md",
-    "date": "2026-04-01",
-    "tags": ["华为", "苹果"]
+    "date": "2026-04-09",
+    "tags": []
   }
 ]
