@@ -7,17 +7,14 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     :root {
-      --bg: #f6f8fc;
-      --card: #ffffff;
       --text: #182134;
-      --subtext: #44506a;
-      --heading: #0f172a;
-      --border: #dbe3f3;
+      --subtext: #4a556d;
+      --line: #dbe3f3;
+      --link: #1d4ed8;
+      --chip-bg: #eef4ff;
+      --chip-text: #1b4298;
       --code-bg: #0f172a;
       --code-text: #e6edf7;
-      --inline-code-bg: #edf2ff;
-      --inline-code-text: #1e3a8a;
-      --link: #1d4ed8;
     }
 
     * {
@@ -26,65 +23,62 @@
 
     body {
       margin: 0;
-      font-family: "Manrope", "PingFang SC", "Microsoft YaHei", sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at 12% 15%, #dce8ff 0 16%, transparent 40%),
-        linear-gradient(160deg, #f8fbff 0%, #eef3ff 100%);
+      font-family: "Manrope", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #f9fbff 0%, #f4f7fc 100%);
       line-height: 1.85;
     }
 
     #content {
-      width: min(760px, calc(100vw - 32px));
-      margin: 40px auto;
-      padding: 28px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 14px 36px rgba(22, 40, 92, 0.08);
+      width: min(94%, 58rem);
+      margin: 2.4rem auto 3rem;
+      padding: 1.7rem 1.6rem;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
       overflow-wrap: anywhere;
+      background: transparent;
     }
 
     #content h1,
     #content h2,
     #content h3 {
-      color: var(--heading);
-      line-height: 1.35;
+      line-height: 1.32;
       letter-spacing: 0.01em;
+      color: var(--text);
     }
 
     #content h1 {
-      margin: 0 0 22px;
-      font-size: clamp(30px, 4.8vw, 42px);
+      margin: 0 0 1.25rem;
+      font-size: clamp(2rem, 4.7vw, 3rem);
     }
 
     #content h2 {
-      margin: 34px 0 16px;
-      font-size: clamp(24px, 3.4vw, 30px);
+      margin: 2rem 0 0.9rem;
+      font-size: clamp(1.45rem, 3vw, 1.95rem);
     }
 
     #content h3 {
-      margin: 26px 0 12px;
-      font-size: clamp(20px, 2.8vw, 24px);
+      margin: 1.45rem 0 0.7rem;
+      font-size: clamp(1.2rem, 2.4vw, 1.5rem);
     }
 
     #content p {
-      margin: 0 0 16px;
+      margin: 0 0 1rem;
       color: var(--subtext);
-      font-size: 17px;
-      line-height: 1.9;
+      font-size: 1.04rem;
+      line-height: 1.95;
     }
 
     #content ul,
     #content ol {
-      margin: 0 0 18px;
-      padding-left: 24px;
+      margin: 0 0 1.15rem;
+      padding-left: 1.5rem;
       color: var(--subtext);
     }
 
     #content li {
-      margin: 8px 0;
-      padding-left: 4px;
+      margin: 0.42rem 0;
+      padding-left: 0.25rem;
     }
 
     #content a {
@@ -100,49 +94,51 @@
     #content code {
       font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas", monospace;
       font-size: 0.9em;
-      background: var(--inline-code-bg);
-      color: var(--inline-code-text);
-      border-radius: 8px;
-      padding: 2px 7px;
+      border: 1px solid #d3def6;
+      background: var(--chip-bg);
+      color: var(--chip-text);
+      border-radius: 0.45rem;
+      padding: 0.08rem 0.42rem;
     }
 
     #content pre {
-      margin: 18px 0 22px;
-      padding: 16px 18px;
+      margin: 1.05rem 0 1.4rem;
+      padding: 0.95rem 1rem;
+      border-radius: 0.65rem;
       background: var(--code-bg);
       color: var(--code-text);
-      border-radius: 12px;
       border: 1px solid #24324f;
       overflow-x: auto;
-      line-height: 1.65;
+      line-height: 1.62;
     }
 
     #content pre code {
+      border: 0;
       background: transparent;
       color: inherit;
       padding: 0;
       border-radius: 0;
-      font-size: 0.93em;
+      font-size: 0.92em;
     }
 
     #content blockquote {
-      margin: 18px 0;
-      padding: 10px 16px;
-      border-left: 4px solid #9db7ef;
+      margin: 1rem 0;
+      padding: 0.6rem 0.9rem;
+      border-left: 3px solid #9db7ef;
       background: #f5f8ff;
       color: #344258;
-      border-radius: 8px;
+      border-radius: 0.45rem;
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 48rem) {
       #content {
-        margin: 18px auto;
-        padding: 20px;
-        border-radius: 14px;
+        width: min(95%, 58rem);
+        margin: 1.3rem auto 1.9rem;
+        padding: 1rem 0.95rem;
       }
 
       #content p {
-        font-size: 16px;
+        font-size: 1rem;
       }
     }
   </style>
