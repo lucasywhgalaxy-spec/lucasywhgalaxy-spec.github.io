@@ -6,8 +6,17 @@ function escapeHtml(text) {
 }
 
 const ALLOWED_TAGS = new Set(["华为", "苹果", "三星", "谷歌"]);
+const COVER_COLORS = ["#dbeafe", "#fee2e2", "#dcfce7", "#fef3c7", "#ede9fe", "#ffe4e6"];
 let allPosts = [];
 let activeTag = "";
+
+function pickColor(seed) {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i += 1) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+  }
+  return COVER_COLORS[hash % COVER_COLORS.length];
+}
 
 function updateFilterStatus() {
   const status = document.getElementById("post-filter-status");
@@ -28,26 +37,35 @@ function renderPosts(posts) {
   if (!list) return;
 
   const sorted = [...posts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date || "").getTime() - new Date(a.date || "").getTime()
   );
 
   list.innerHTML = sorted
-    .map((post) => {
+    .map((post, index) => {
       const tags = Array.isArray(post.tags)
         ? post.tags.filter((tag) => ALLOWED_TAGS.has(tag))
         : [];
-      const tagHtml = tags
-        .map((tag) => {
-          const activeClass = tag === activeTag ? " active" : "";
-          return `<button type="button" class="post-tag-chip${activeClass}" data-tag="${tag}">#${escapeHtml(tag)}</button>`;
-        })
-        .join("");
+
+      const tagHtml = tags.length
+        ? tags
+            .map((tag) => {
+              const activeClass = tag === activeTag ? " active" : "";
+              return `<button type="button" class="post-tag-chip${activeClass}" data-tag="${escapeHtml(tag)}">#${escapeHtml(tag)}</button>`;
+            })
+            .join("")
+        : '<span class="post-tag-chip muted">#未分类</span>';
+
+      const coverColor = pickColor(`${post.file || ""}-${index}`);
+      const dateText = post.date ? escapeHtml(post.date) : "";
 
       return `
-        <li>
-          <a href="post.html?file=${encodeURIComponent(post.file)}">${escapeHtml(post.title)}</a>
-          <span style="opacity:0.6; margin-left:8px;">${escapeHtml(post.date)}</span>
-          ${tagHtml ? `<div class="post-tags">${tagHtml}</div>` : ""}
+        <li class="post-item">
+          <div class="post-cover" style="background:${coverColor};"></div>
+          <div class="post-body">
+            <h3 class="post-title"><a href="post.html?file=${encodeURIComponent(post.file)}">${escapeHtml(post.title)}</a></h3>
+            <div class="post-meta">${dateText}</div>
+            <div class="post-tags">${tagHtml}</div>
+          </div>
         </li>
       `;
     })
@@ -59,7 +77,7 @@ function bindTagFilter() {
   if (!list) return;
 
   list.addEventListener("click", (event) => {
-    const chip = event.target.closest(".post-tag-chip");
+    const chip = event.target.closest(".post-tag-chip[data-tag]");
     if (!chip) return;
 
     const tag = chip.dataset.tag || "";
@@ -78,33 +96,14 @@ async function loadPosts() {
   try {
     const res = await fetch("posts.json");
     const posts = await res.json();
-
-    if (!Array.isArray(posts)) {
-      throw new Error("posts.json 格式错误");
-    }
+    if (!Array.isArray(posts)) throw new Error("posts.json 格式错误");
 
     allPosts = posts;
     renderPosts(getFilteredPosts(allPosts));
     updateFilterStatus();
   } catch (error) {
-    list.innerHTML = "<li>文章加载失败</li>";
+    list.innerHTML = "<li class=\"post-item\"><div class=\"post-body\">文章加载失败</div></li>";
   }
-}
-
-const revealNodes = document.querySelectorAll(".reveal");
-revealNodes.forEach((node, index) => {
-  setTimeout(() => {
-    node.classList.add("show");
-  }, index * 120);
-});
-
-const avatarWrap = document.getElementById("avatar-wrap");
-if (avatarWrap && window.matchMedia("(min-width: 761px)").matches) {
-  window.addEventListener("mousemove", (event) => {
-    const x = (event.clientX / window.innerWidth - 0.5) * 10;
-    const y = (event.clientY / window.innerHeight - 0.5) * 10;
-    avatarWrap.style.transform = `translate(${x}px, ${y}px)`;
-  });
 }
 
 bindTagFilter();

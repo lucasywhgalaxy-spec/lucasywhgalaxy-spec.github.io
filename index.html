@@ -13,43 +13,41 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="page">
-      <section class="hero card reveal">
-        <div class="hero-layout">
-          <div class="avatar-wrap" id="avatar-wrap">
-            <img id="avatar" src="avatar.jpg" alt="汪沄头像" class="avatar" />
+    <main class="homepage">
+      <section class="profile-header">
+        <div class="profile-avatar-wrap" id="avatar-wrap">
+          <img id="avatar" src="avatar.jpg" alt="汪沄头像" class="profile-avatar" />
+        </div>
+
+        <div class="profile-main">
+          <p class="profile-kicker">个人主页</p>
+          <h1 id="hero-title">peppercorn_ice</h1>
+
+          <div class="chip-row">
+            <span class="chip">Galaxy S26 White</span>
+            <span class="chip">MacBook Air 13” Starlight</span>
+            <span class="chip">SD 8 Elite Gen 5</span>
+            <span class="chip">Apple M5</span>
           </div>
-          <div class="hero-copy">
-            <div class="hero-top">
-              <p class="tag">个人主页</p>
-            </div>
-            <h1 id="hero-title">鲲之大，一锅炖不下</h1>
-            <div class="chip-row">
-              <span class="chip">Galaxy S</span>
-              <span class="chip">Google Pixel</span>
-              <span class="chip">iPhone</span>
-              <span class="chip">MacBook Air</span>
-              <span class="chip">Exynos</span>
-              <span class="chip">Apple silicon</span>
-              <span class="chip">AirPods Pro</span>
-            </div>
+
+          <div class="contact-block">
+            <h2 id="contact-title">联系方式</h2>
+            <p>
+              电子邮件：<a href="mailto:lucasywh.galaxy@gmail.com" id="contact-link">lucasywh.galaxy@gmail.com</a>
+            </p>
+            <p>
+              水源社区：<a href="https://shuiyuan.sjtu.edu.cn/u/%E4%B8%80%E9%94%85%E7%82%96%E4%B8%8D%E4%B8%8B/summary" target="_blank" rel="noopener noreferrer">鲲之大 @一锅炖不下</a>（SJTU-jAccount required）
+            </p>
           </div>
         </div>
       </section>
 
-      <section class="grid">
-        <article class="card reveal">
-          <h2 id="contact-title">联系方式</h2>
-          <p>
-            电子邮件：<a href="mailto:lucasywh.galaxy@gmail.com" id="contact-link">lucasywh.galaxy@gmail.com</a><br />
-            水源社区：<a href="https://shuiyuan.sjtu.edu.cn/u/%E4%B8%80%E9%94%85%E7%82%96%E4%B8%8D%E4%B8%8B/summary" target="_blank" rel="noopener noreferrer">鲲之大 @一锅炖不下</a>（SJTU-jAccount required）
-          </p>
-        </article>
-        <article class="card reveal">
+      <section class="posts-feed">
+        <div class="posts-head">
           <h2>文章</h2>
           <p id="post-filter-status" class="post-filter-status">当前筛选：全部</p>
-          <ul id="post-list"></ul>
-        </article>
+        </div>
+        <ul id="post-list" class="post-list"></ul>
       </section>
     </main>
 
